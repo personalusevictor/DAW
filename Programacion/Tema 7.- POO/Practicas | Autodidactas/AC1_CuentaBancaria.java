@@ -2,53 +2,39 @@ import java.util.*;
 
 class CuentaBancaria {
 	
-	static final Scanner sc = new Scanner(System.in);
+	private String titular;
+	private double sueldo;
 	
-	String titular;
-	double sueldo;
-	
-	CuentaBancaria() {}
-	CuentaBancaria(String titular) {
+	public CuentaBancaria(String titular) {
 		this.titular = titular;
 		this.sueldo = 0;
 	}
 	
-	double ingresarDinero() {
-		double sueldoIngresar;
-		
-		System.out.print("Cuanto dinero deseas ingresar: ");
-		sueldoIngresar = sc.nextDouble();
-		
-		if(sueldoIngresar <= 0) {
-			System.out.println("Error: No puedes ingresar un cantidad menor o igual a 0€");
-			return 0;
+	public void ingresarDinero(double cantidadIngresar) {
+		if(cantidadIngresar <=0) {
+			System.out.println("Error: No puedes ingresar una cantidad menor o igual a 0€");
 		} else {
-			return sueldoIngresar;
+			sueldo += cantidadIngresar;
 		}
 	}
 	
-	double sacarDinero(double sueldo) {
-		double sueldoSacar;
-		
-		System.out.print("Cuanto dinero deseas sacar: ");
-		sueldoSacar = sc.nextDouble();
-		
+	public void sacarDinero(double sueldoSacar) {
 		if(sueldoSacar <= 0) {
 			System.out.println("Error: No puedes sacar una cantidad menor o igual a 0€");
 		} else if(sueldoSacar > sueldo) {
 			System.out.println("Error: No puedes sacar una cantidad mayor a tu sueldo actual");
 		} else {
-			CuentaBancaria cuenta = new CuentaBancaria();
-			cuenta.sueldo -= sueldoSacar;
-			return sueldoSacar;
+			sueldo -= sueldoSacar;
 		}
-		return 0;
 	}
 	
-	void mostrarInfo(String titular, double sueldo) {
-		System.out.println("- Información de la cuenta -");
-		System.out.println("Titular: "+titular);
-		System.out.println("Sueldo: "+sueldo+"€");
+	public double getSaldo() {
+		return sueldo;
+	}
+	
+	
+	public String toString(){
+		return "- Información de la cuenta -\nTitular: "+titular+"\nSueldo: "+sueldo+"$";
 	}
 }
 
@@ -82,9 +68,16 @@ public class AC1_CuentaBancaria {
 			System.out.println();
 			
 			switch (opcion) {
-				case 1 -> cuenta.sueldo += cuenta.ingresarDinero();
-				case 2 -> cuenta.sueldo -= cuenta.sacarDinero(cuenta.sueldo);
-				case 3 -> cuenta.mostrarInfo(cuenta.titular, cuenta.sueldo);
+				case 1 -> {
+					System.out.print("Que cantidad deseas ingresar: ");
+					cuenta.ingresarDinero(sc.nextDouble());
+					
+				}
+				case 2 -> {
+					System.out.print("Que cantidad deseas sacar: ");
+					cuenta.sacarDinero(sc.nextDouble());
+				}
+				case 3 -> System.out.println(cuenta);
 				case 0 -> System.out.println("Saliendo del programa...");
 				default -> System.out.println("Error: Valor invalido");
 			}
