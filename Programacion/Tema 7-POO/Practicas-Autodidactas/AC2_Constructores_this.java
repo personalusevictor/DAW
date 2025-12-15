@@ -30,9 +30,5 @@ class Persona {
 
 public class AC2_Constructores_this {
 	public static void main(String[] args) {
-		Persona p1 = new Persona("Víctor", 18, "42420057F");
-		Persona p2 = new Persona("Jose Luis", 42, "42420056F");
-		
-		System.out.println(Persona.getTotalPersonas());
 	}
 }
