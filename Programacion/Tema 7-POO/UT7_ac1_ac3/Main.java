@@ -1,4 +1,4 @@
-package UT7_ac1;
+package UT7_ac1_ac3;
 import java.util.*;
 public class Main {
 	static final Scanner sc = new Scanner(System.in);
