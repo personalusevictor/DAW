@@ -6,26 +6,40 @@ import java.util.*;
 		 class CuentaCorriente {
 			static final Scanner sc = new Scanner(System.in);
 	
-			// Atributos
+			// ATRIBUTOS
 			String DNI;
-			String nombreTitular;
-			double sueldo;
+			public String nombreTitular;
+			private double sueldo;
+			static String nombreBanco;
 	
-			//Constructores
+			// CONSTRUCTORES
 			CuentaCorriente(String DNI, String nombreTitular) {
-				this(DNI, nombreTitular, 0);
+				this(DNI, nombreTitular, 0, null);
 			}
 			
-			CuentaCorriente(String DNI, String nombreTitular, int sueldo) {
+			CuentaCorriente(String DNI, String nombreTitular, int sueldo, String nombreBanco) {
 				this.DNI = DNI;
 				this.nombreTitular = nombreTitular;
 				this.sueldo = sueldo;
+				setNombreBanco(nombreBanco);
 			}
 	
 			static CuentaCorriente[] cuentas = new CuentaCorriente[0];
 	
-			// Métodos
+			// GETERS/SETERS
+			public String getNombreBanco() {
+				return nombreBanco;
+			}
 			
+			static void setNombreBanco(String nuevoBanco) {
+				if(nombreBanco.equals(null)) System.out.println("Error: El nombre del banco no puede ser null");
+				else {
+					nombreBanco = nuevoBanco;
+				}
+			}
+			
+			
+			// METODOS
 			// Crear cuenta
 			static CuentaCorriente[] crearCuenta() {
 				System.out.print("Dime tu DNI: ");
@@ -42,6 +56,7 @@ import java.util.*;
 				return cuentas;
 			}
 			
+			// Sacar dinero
 			static double sacarDinero() {
 				double sueldoSacar;
 				String dniCuenta;
@@ -75,6 +90,7 @@ import java.util.*;
 				} while (true);
 			}
 			
+			// Metodo auxiliar para comprobar si el hay saldo suficiente
 			static boolean comprobacionSacar(CuentaCorriente cuenta, double sueldoSacar) {
 				
 				if(sueldoSacar > cuenta.sueldo) {
@@ -91,6 +107,7 @@ import java.util.*;
 				return null;
 			}
 	
+			// Ingresar dinero
 			static double ingresarDinero() {
 				double sueldoIngresar;
 				String dniCuenta;
@@ -123,13 +140,16 @@ import java.util.*;
 				} while (true);
 			}
 			
+			// Mostrar un Usuario Unico
 			void mostrarUnico() {
 				System.out.println("Titular: " + nombreTitular);
 				System.out.println("DNI: " + DNI);
 				System.out.println("Sueldo: " + sueldo +"€");
+				System.out.println("Banco: " + nombreBanco);
 				System.out.println("-------------------------");
 			}
 			
+			// Mostrar Información de todos los Usuarios
 			static void mostrarInformacion() {
 				if(cuentas.length == 0){
 					System.out.println("Error: No hay ninguna cuenta creada");
@@ -141,7 +161,6 @@ import java.util.*;
 				for(CuentaCorriente dato : cuentas) {
 					dato.mostrarUnico();
 				}
-				
 			}
 		}
 		
