@@ -1,4 +1,3 @@
-package UT7_SmartLight;
 import java.util.*;
 
 public class Main {

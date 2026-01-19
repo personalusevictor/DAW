@@ -1,5 +1,3 @@
-package UT7_ac2;
-
 public class Perro {
 		
 	//Atributos

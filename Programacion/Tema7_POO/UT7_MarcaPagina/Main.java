@@ -1,4 +1,3 @@
-package UT7_MarcaPagina;
 import java.util.*;
 
 public class Main {

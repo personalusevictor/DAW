@@ -1,10 +1,8 @@
-package UT7_Gestion_CursosEstudiantes;
-
 public class Curso {
 	
-	/* ------------------
-	   ATRIBUTOS PRIVADOS
-	   ------------------ */
+	/* --------------------------------
+	   ATRIBUTOS PRIVADOS Y CONSTRUCTOR
+	   -------------------------------- */
 		 
 	private String nombreCurso;
 	private String codigo;
@@ -27,7 +25,8 @@ public class Curso {
 	public String getNombreCurso() {
 		return nombreCurso;
 	}
-
+	
+	//Setter especifico para el nombre del curso
 	public void setNombreCurso(String nombreCurso) {
 		if(nombreCurso == null || nombreCurso.trim().isEmpty()) {
 			System.out.println("Error: El nombre no es valido");
@@ -61,10 +60,12 @@ public class Curso {
 	   METODOS PRINCIPALES
 	   ------------------- */
 	
+	//Metodo semiauxiliar para saber si hay espacio en el curso
 	public boolean hayEspacio() {
 		return cantidadEstudiante < estudiantes.length;
 	}
 	
+	//Metodo para agregar estudiante utilizando el array fijo estudiantes
 	public void agregarEstudiante(Estudiante nuevoEstudiante) {
 		
 		if(nuevoEstudiante == null ) {
@@ -80,18 +81,19 @@ public class Curso {
 		
 		System.out.println("Estudiante "+nuevoEstudiante.getNombre() + "añadido correctamente");
 	
-	/* -- OTRA FORMA DE HACERLO --
-	nuevoEstudiante = new Estudiante(nombre, edad, promedio);
-	
-	estudiantes = arrays.CopyOf(estudiantes, estudiantes.length + 1);
-	estudiantes[estudiantes.length - 1] = nuevoEstudiante;
-	
-	System.out.println("Estudiante" +nuevoEstudiante.getNombre() + "añadido correctamente");
-	
-	
-	Cosas a tener en cuenta de este modo: tendrías que pasar por parametros los datos del estudiante, y rediseñar la clase main*/
+			/* -- OTRA FORMA DE HACERLO --
+			nuevoEstudiante = new Estudiante(nombre, edad, promedio);
+			
+			estudiantes = arrays.CopyOf(estudiantes, estudiantes.length + 1);
+			estudiantes[estudiantes.length - 1] = nuevoEstudiante;
+			
+			System.out.println("Estudiante" +nuevoEstudiante.getNombre() + "añadido correctamente");
+			
+			
+			Cosas a tener en cuenta de este modo: tendrías que pasar por parametros los datos del estudiante, y rediseñar la clase main*/
 	}
 	
+	//Muestra la información necesaria del curso
 	public void mostrarInformacionCurso() {
 		
 		System.out.println("\n----------------------------");
@@ -102,6 +104,7 @@ public class Curso {
 		System.out.println("Plazas Disponibles: "+getPlazasDisponibles());
 		System.out.println("----------------------------");
 		
+		//Condicional por si acaso no haya estudiantes
 		if(cantidadEstudiante == 0) {
 			System.out.println("No hay estudiantes inscritos");
 		} else {

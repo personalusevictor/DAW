@@ -1,5 +1,5 @@
-package UT7_CuentaCorriente;
 import java.util.*;
+
 public class Main {
 	static final Scanner sc = new Scanner(System.in);
 	

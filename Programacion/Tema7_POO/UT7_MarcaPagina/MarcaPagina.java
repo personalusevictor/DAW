@@ -1,5 +1,3 @@
-package UT7_MarcaPagina;
-
 public class MarcaPagina {
 	public String nombre;
 	private int pagina;
