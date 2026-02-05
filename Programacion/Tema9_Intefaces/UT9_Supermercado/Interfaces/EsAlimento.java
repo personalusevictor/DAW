@@ -1,0 +1,11 @@
+package Tema9_Intefaces.UT9_Supermercado.Interfaces;
+
+import java.time.LocalDate;
+
+public interface EsAlimento {
+	
+	public void setCaducidad(LocalDate fc);
+	public LocalDate getCaducidad();
+	public int getCalorias();
+	
+}

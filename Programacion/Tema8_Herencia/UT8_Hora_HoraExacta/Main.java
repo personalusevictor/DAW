@@ -1,3 +1,5 @@
+package Tema8_Herencia.UT8_Hora_HoraExacta;
+
 import java.util.*;
 
 public class Main {
@@ -6,7 +8,8 @@ public class Main {
 		System.out.println("1.- Incrementar minuto");
 		System.out.println("2.- Incrementar segundos");
 		System.out.println("3.- Mostrar hora");
-		System.out.println("4.- Salir");
+		System.out.println("4.- Igualar horas");
+		System.out.println("5.- Salir");
 		System.out.print("Dime una opcion: ");
 	}
 	
@@ -31,7 +34,10 @@ public class Main {
 				case 1 -> reloj.inc();			
 				case 2 -> reloj.incSegundos();
 				case 3 -> System.out.println(reloj);
-				case 4 -> System.out.println("Saliendo del programa...");
+				case 4 -> {
+					System.out.print("Que hora deseas igualar con la hora actual: ");
+				}
+				case 5 -> System.out.println("Saliendo del programa...");
 				default -> System.out.println("Error: la opcion introducida no es valida");
 			}
 		} while (opcion != 4);

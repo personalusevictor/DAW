@@ -1,3 +1,5 @@
+package Tema8_Herencia.UT8_Hora_HoraExacta;
+
 import java.util.*;
 
 public class Hora {

@@ -1,3 +1,5 @@
+package Tema7_POO.UT7_SmartLight;
+
 class Bombilla {
 	public String nombre;
 	private boolean encendida;

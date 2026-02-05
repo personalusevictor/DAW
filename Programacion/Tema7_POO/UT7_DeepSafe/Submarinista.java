@@ -1,4 +1,4 @@
-package Programacion.Tema7_POO.UT7_DeepSafe;
+package Tema7_POO.UT7_DeepSafe;
 import java.util.*;
 
 public class Submarinista {

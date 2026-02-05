@@ -1,3 +1,5 @@
+package Tema8_Herencia.UT8_Hora_HoraExacta;
+
 public class HoraExacta extends Hora {
 	private int segundos;
 	
@@ -39,8 +41,22 @@ public class HoraExacta extends Hora {
 		}
 	}
 	
+	@Override
 	public String toString() {
 		return String.format("%02d:%02d:%02d", getHora(), getMinutos(), getSegundos());
+	}
+	
+	@Override
+	public boolean equals(Object otra) {
+		boolean iguales;
+		int otraHora = (int) otra;
+		
+		if(this.hora == otraHora) {
+			iguales = true;
+		} else {
+			iguales = false;
+		}
+		return iguales;
 	}
 	
 }

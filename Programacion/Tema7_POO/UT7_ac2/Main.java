@@ -1,3 +1,5 @@
+package Tema7_POO.UT7_ac2;
+
 public class Main {
 	public static void main(String[] args) {
 		Perro perro1 = new Perro("Firulais", "Bulldog Frances");

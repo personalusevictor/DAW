@@ -1,3 +1,5 @@
+package Tema7_POO.UT7_MarcaPagina;
+
 public class MarcaPagina {
 	public String nombre;
 	private int pagina;

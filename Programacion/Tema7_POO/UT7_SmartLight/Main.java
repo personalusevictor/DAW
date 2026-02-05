@@ -1,3 +1,5 @@
+package Tema7_POO.UT7_SmartLight;
+
 import java.util.*;
 
 public class Main {

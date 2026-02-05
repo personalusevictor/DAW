@@ -1,3 +1,5 @@
+package Tema8_Herencia.UT8_Sistema_Vehiculo;
+
 public class Vehiculo {
 	protected String marca;
 	protected String modelo;
