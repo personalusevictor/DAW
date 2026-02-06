@@ -1,6 +1,7 @@
 package Tema9_Intefaces.UT9_Supermercado.Productos;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import Tema9_Intefaces.UT9_Supermercado.Enum.TipoCereales;
 import Tema9_Intefaces.UT9_Supermercado.Interfaces.EsAlimento;
@@ -91,7 +92,11 @@ public class Cereales implements EsAlimento{
 	
 	@Override
 	public String toString() {
-		return String.format("\n=== Información Cereales ===\nMarca: %s\nPrecio: %.2f\nTipo de Cereales: %s\nCaducidad: %s\nCalorias: %", marca, precio, tipo, caducidad, calorias);
+
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+	String caducidadString = caducidad.format(formatter);
+
+		return String.format("\n=== Información Cereales ===\nMarca: %s\nPrecio: %.2f\nTipo de Cereales: %s\nCaducidad: %s\nCalorias: %d", marca, precio, tipo, caducidadString, calorias);
 	}
 	
 }
