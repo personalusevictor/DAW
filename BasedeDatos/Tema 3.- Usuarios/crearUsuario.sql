@@ -1,0 +1,1 @@
+create user victor1 IDENTIFIED BY 'victor';

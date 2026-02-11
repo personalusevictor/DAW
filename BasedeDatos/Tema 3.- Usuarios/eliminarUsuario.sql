@@ -1,0 +1,1 @@
+drop user victor1, victor2;
