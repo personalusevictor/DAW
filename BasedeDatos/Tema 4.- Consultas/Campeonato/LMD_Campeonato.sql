@@ -32,9 +32,10 @@ SELECT cdequipo AS 'código', nombre, comunidad, anio_funda AS 'año de fundaci�
 WHERE comunidad like 'Andalucia';
 
 /* 3.- Listado con el código, nombre, dificultad y megusta del o los juegos con mas megusta. (Con subconsulta). */
-
 SELECT cdjuego AS 'código', nombre, dificultad, megusta FROM juego WHERE megusta IN (SELECT MAX(megusta) FROM juego);
 
 /* 4.- Listado con todos los datos de los juegos sin valor (valor nulo) en megusta y nombre de su equipo organizador. */
-
 SELECT * FROM juego j INNER JOIN equipo e WHERE megusta IS NULL AND j.cdequipo = e.cdequipo AND e.nombre IS NULL;
+
+/* 5.- Listado con el nombre, dificultad, megusta y código de equipo de los juegos  organizados por el mismo equipo que el del juego de nombre 'Elvenar'. (Con subconsulta) */
+SELECT nombre, dificultad, megusta, cdequipo AS 'código de equipo' FROM juego WHERE cdjuego IN (SELECT cdjuego FROM juego WHERE nombre like 'Elvenar');
