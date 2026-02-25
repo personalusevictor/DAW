@@ -59,4 +59,4 @@ SELECT c.cdconcur, c.nombre, ROUND(AVG(p.puntos), 2) AS media_puntos, i.cdconcur
 SELECT j.nombre, IFNULL(j.megusta, 0) AS "Me gusta", j.dificultad, COUNT(p.cdconcur) AS "Nº Concursantes" FROM juego j INNER JOIN participa p ON j.cdjuego like p.cdjuego WHERE j.nombre LIKE '%Empire%' GROUP BY j.cdjuego, j.nombre, j.megusta, j.dificultad;
 
 /* 12.- Listado con el código de juego y total de concursantes que participan en cada juego. En el listado mostrar solo los juegos en los que participan 2 o más concursantes. Ordenar de más  menos paticipación.*/
-SELECT p.cdjuego, COUNT(p.cdconcur) AS "cuenta" FROM participa p GROUP BY p.cdjuego HAVING COUNT(cdconcur) >= 2 ORDER BY p.cdjuego;
+SELECT p.cdjuego, COUNT(p.cdconcur) AS "cuenta" FROM participa p GROUP BY p.cdjuego HAVING COUNT(cdconcur) >= 2 ORDER BY 2 DESC;
