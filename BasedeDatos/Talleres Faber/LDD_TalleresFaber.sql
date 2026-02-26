@@ -1,0 +1,108 @@
+DROP DATABASE IF EXISTS TalleresFaber;
+
+CREATE DATABASE TalleresFaber;
+
+USE TalleresFaber;
+
+CREATE TABLE CLIENTES (
+CodCliente VARCHAR(5) NOT NULL,
+DNI VARCHAR(10) NOT NULL,
+Apellidos VARCHAR(50),
+Nombre VARCHAR(25),
+Direccion VARCHAR(50),
+Telefono VARCHAR(9),
+PRIMARY KEY (CodCliente)
+);
+
+CREATE TABLE VEHICULOS (
+Matricula VARCHAR(8) NOT NULL,
+Marca VARCHAR(25),
+Modelo VARCHAR(50),
+Color VARCHAR(20),
+FechaMatriculacion DATE,
+CodCliente  VARCHAR(5),
+PRIMARY KEY(Matricula),
+FOREIGN KEY(CodCliente )REFERENCES CLIENTES(CodCliente)
+);
+
+
+CREATE TABLE REPARACIONES (
+IdReparacion INTEGER NOT NULL AUTO_INCREMENT,
+Matricula VARCHAR(8) NOT NULL,
+FechaEntrada DATE,
+Km DECIMAL(8,2),
+Avería VARCHAR(200),
+FechaSalida DATE,
+Reparado  TINYINT(1),
+Observaciones VARCHAR(250),
+PRIMARY KEY(IdReparacion),
+FOREIGN KEY(Matricula )REFERENCES VEHICULOS(Matricula)
+);
+
+
+CREATE TABLE FACTURAS (
+IdFactura INTEGER(4) NOT NULL,
+FechaFactura DATE NOT NULL,
+CodCliente VARCHAR(5) NOT NULL,
+IdReparacion INTEGER,
+PRIMARY KEY (IdFactura),
+FOREIGN KEY(CodCliente )REFERENCES CLIENTES(CodCliente),
+FOREIGN KEY(IdReparacion )REFERENCES REPARACIONES(IdReparacion)
+);
+
+CREATE TABLE EMPLEADOS (
+CodEmpleado VARCHAR(5) NOT NULL,
+DNI VARCHAR(10) NOT NULL,
+Nombre VARCHAR(25),
+Apellidos VARCHAR(50),
+Dirección VARCHAR(50),
+Telefono VARCHAR(9),
+CP VARCHAR(5),
+FechaAlta DATE,
+Categoria VARCHAR(50),
+PRIMARY KEY(CodEmpleado)
+);
+
+CREATE TABLE Intervienen (
+CodEmpleado VARCHAR(5),
+IdReparacion INTEGER NOT NULL,
+Horas DECIMAL(4,2),
+PRIMARY KEY(CodEmpleado, IdReparacion),
+FOREIGN KEY(CodEmpleado) REFERENCES EMPLEADOS(CodEmpleado),
+FOREIGN KEY(IdReparacion) REFERENCES REPARACIONES(IdReparacion)
+);
+
+CREATE TABLE RECAMBIOS (
+IdRecambio VARCHAR(10) NOT NULL,
+Descripcion VARCHAR(100),
+UnidadBase VARCHAR(50),
+Stock SMALLINT, 
+PrecioReferencia DECIMAL(6,2),
+PRIMARY KEY(IdRecambio)
+);
+
+CREATE TABLE Incluyen (
+IdRecambio VARCHAR(10) NOT NULL,
+IdReparacion INTEGER NOT NULL,
+Unidades SMALLINT,
+PRIMARY KEY (IdRecambio, IdReparacion),
+FOREIGN KEY(IdRecambio) REFERENCES RECAMBIOS(IdRecambio),
+FOREIGN KEY(IdReparacion) REFERENCES REPARACIONES(IdReparacion)
+);
+
+CREATE TABLE ACTUACIONES (
+Referencia VARCHAR(10) NOT NULL,
+Descripcion VARCHAR(100),
+TiempoEstimado DECIMAL(4,2),
+Importe DECIMAL(6,2),
+PRIMARY KEY(Referencia)
+);
+
+CREATE TABLE Realizan (
+IdReparacion INTEGER NOT NULL,
+Referencia VARCHAR(10) NOT NULL,
+Horas DECIMAL(4,2),
+PRIMARY KEY(IdReparacion, Referencia),
+FOREIGN KEY(IdReparacion) REFERENCES REPARACIONES(IdReparacion),
+FOREIGN KEY(Referencia) REFERENCES ACTUACIONES(Referencia)
+);
