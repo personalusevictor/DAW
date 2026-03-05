@@ -39,11 +39,11 @@ IdRecambio, Descripción, UnidadBase y Stock, de los artículos que superen el s
     Para los artículos cuya unidad base se mide como una unidad se considera el stock óptimo hasta 10 artículos.
     Para los artículos cuya unidad base no sea una unidad el stock considerado como óptimo es hasta 4 artículos.
 */
-SELECT re.IdRecambio, re.Descripcion, re.UnidadBase FROM recambios re WHERE re.Stock <= 10;
-SELECT re.IdRecambio, re.Descripcion, re.UnidadBase FROM recambios re WHERE re.Stock <= 4;
+SELECT re.IdRecambio, re.Descripcion, re.UnidadBase, re.Stock FROM recambios re 
+WHERE re.Stock < 4 AND UnidadBase NOT LIKE "Unidad" OR re.Stock < 10 AND UnidadBase LIKE "Unidad";
 
 /* 9.- Con relación a las actuaciones, se considera importante saber cuántas reparaciones se realizan de importe superior a la media. La consulta nos devolverá un solo dato: el número de reparaciones realizadas cuyo importe supera el importe medio de las actuaciones. */
-SELECT COUNT(r.IdReparacion) AS "Nº de Reparaciones Superior a la Media" FROM realizan r INNER JOIN actuaciones a ON r.Referencia like a.Referencia WHERE importe > (SELECT AVG(importe) FROM actuaciones);
+SELECT COUNT(r.IdReparacion) "Nº de Reparaciones Superior a la Media" FROM realizan r INNER JOIN actuaciones a ON r.Referencia like a.Referencia WHERE importe > (SELECT AVG(importe) FROM actuaciones);
 
 /* 10.- Obtener un listado que nos informe del número de facturas que hemos emitido a cada cliente. El listado tendrá dos columnas: el nombre completo del cliente y el número de facturas que le corresponden. */
 SELECT CONCAT(c.Apellidos, ", ",c.Nombre), COUNT(f.IdFactura) "Número de facturas" FROM clientes c INNER JOIN facturas f ON c.CodCliente like f.CodCliente GROUP BY c.CodCliente ORDER BY COUNT(f.IdFactura) DESC;
@@ -51,7 +51,14 @@ SELECT CONCAT(c.Apellidos, ", ",c.Nombre), COUNT(f.IdFactura) "Número de factur
 /* 11.- Obtener una lista de reparaciones junto con el nombre del cliente y el empleado que trabajó en la reparación, entre el 5 y 10 de enero. En caso el coche siga en taller que ponga 'Sin Reparar' en fecha de salida (usa left join).*/
 SELECT r.IdReparacion, c.Nombre as Cliente, e.Nombre as Empleado, r.Avería, r.FechaEntrada, ifnull(r.FechaSalida, "Sin Reparar") "Fecha Salida" FROM reparaciones r
 	LEFT JOIN vehiculos v ON v.Matricula like r.Matricula
-    LEFT JOIN clientes c ON v.CodCliente like c.CodCliente
-    LEFT JOIN intervienen i ON r.IdReparacion like i.IdReparacion
-    LEFT JOIN empleados e ON i.CodEmpleado like e.CodEmpleado
-    WHERE r.FechaEntrada BETWEEN '2011-01-05' AND '2011-01-10';
+  LEFT JOIN clientes c ON v.CodCliente like c.CodCliente
+  LEFT JOIN intervienen i ON r.IdReparacion like i.IdReparacion
+  LEFT JOIN empleados e ON i.CodEmpleado like e.CodEmpleado
+WHERE r.FechaEntrada BETWEEN '2011-01-05' AND '2011-01-10';
+
+
+/* 12.- Obtener todos los recambios utilizados en las reparaciones, incluyendo todas las reparaciones aunque no se les han sido asignados ningún recambios, durante el mes de enero. En caso de no usar recambio que ponga 'No necesitó recambios en la descripción del recambio y *** en el recambio. (usa right join) */
+SELECT r.idReparacion, r.FechaSalida, IFNULL(rec.descripcion, 'No necesitó recambios') AS descripcion_recambio, IFNULL(i.IdRecambio, '***') AS id_recambio_formateado FROM incluyen i 
+	RIGHT JOIN reparaciones r ON i.IdReparacion = r.IdReparacion 
+	LEFT JOIN recambios rec ON i.IdRecambio = rec.IdRecambio 
+WHERE month(r.FechaSalida) = 1;
