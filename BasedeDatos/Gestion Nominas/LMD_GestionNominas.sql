@@ -90,3 +90,21 @@ SELECT e.nombre, e.hijos FROM empleados e WHERE e.hijos IN (SELECT MIN(e.hijos) 
 
 /* 21.- Nombre de los empleados que no tienen justificante de nóminas.*/
 SELECT e.nombre FROM empleados e WHERE e.codigo NOT IN (SELECT cod_emp FROM just_nominas);
+
+/* 22.- Nombre y fecha de nacimiento de todos los empleados (formato corto y largo). */
+SELECT e.nombre, 
+date_format(e.fnacimiento, '%d / %m / %Y') 'Fecha de Nacimiento Corto', e.fnacimiento 'Fecha de Nacimiento Largo' 
+FROM empleados e;
+
+/* 23.- Nombre, edad y número de hijos de los empleados que tienen más de 50 años y tienen hijos. */
+SELECT e.nombre, 
+timestampdiff(year, e.fnacimiento, current_date()) 'Edad', e.hijos 
+FROM empleados e 
+WHERE timestampdiff(year, e.fnacimiento, current_date()) > 50 AND e.hijos > 0;
+
+/* 24.- Nombre, edad de los empleados y nombre del departamento de los empleados que han trabajado en más de un 
+departamento. */
+SELECT e.nombre, timestampdiff(year, e.fnacimiento, current_date()) 'Edad', d.nombre FROM trabajan t
+INNER JOIN empleados e ON e.codigo like t.cod_emp
+INNER JOIN departamentos d ON d.codigo like t.cod_dep
+WHERE e.codigo IN (SELECT t.cod_emp FROM trabajan t GROUP BY t.cod_emp HAVING COUNT(t.cod_dep) > 1);
