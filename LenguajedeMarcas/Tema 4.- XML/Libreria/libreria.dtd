@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding = "UTF-8"?>
+<!ELEMENT Libreria (Libro*)>
+<!ELEMENT Libro (Titulo, Autor, Editor, ISBN, Precio, Novedad)>
+<!ELEMENT Titulo (#PCDATA)>
+<!ELEMENT Autor (#PCDATA)>
+<!ELEMENT Editor (#PCDATA)>
+<!ELEMENT ISBN (#PCDATA)>
+<!ELEMENT Precio (#PCDATA)>
+<!ELEMENT Novedad (#PCDATA)>
