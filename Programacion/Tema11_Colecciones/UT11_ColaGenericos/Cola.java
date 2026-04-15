@@ -1,4 +1,4 @@
-package Tema11_Colecciones.UT11_Cola_Genericos;
+package Tema11_Colecciones.UT11_ColaGenericos;
 
 public interface Cola<T> {
 

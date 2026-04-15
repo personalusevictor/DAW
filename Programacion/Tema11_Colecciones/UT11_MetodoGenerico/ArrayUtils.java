@@ -1,4 +1,4 @@
-package Tema11_Colecciones.UT11_Metodo_Generico;
+package Tema11_Colecciones.UT11_MetodoGenerico;
 
 import java.util.Arrays;
 

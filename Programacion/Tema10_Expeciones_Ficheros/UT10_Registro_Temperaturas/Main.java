@@ -1,3 +1,5 @@
+package Tema10_Expeciones_Ficheros.UT10_Registro_Temperaturas;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;

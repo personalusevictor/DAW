@@ -1,3 +1,5 @@
+package Tema10_Expeciones_Ficheros.UT10_Registro_Temperaturas;
+
 import java.time.LocalDateTime;
 
 public class Temperaturas {
