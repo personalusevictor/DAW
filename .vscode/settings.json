@@ -1,4 +1,8 @@
 {
-  "java.project.sourcePaths": ["Programacion"],
-  "java.project.referencedLibraries": []
+  "java.project.sourcePaths": [
+    "Programacion",
+    "Programacion\\UT12_BD\\Ac1Instituto"
+  ],
+  "java.project.referencedLibraries": [],
+  "scm.compactFolders": true
 }
