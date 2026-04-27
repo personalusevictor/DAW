@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT Notas (Nota*)>
+<!ELEMENT Nota (Nombre, Calificacion)>
+<!ELEMENT Nombre (#PCDATA)>
+<!ELEMENT Calificacion (#PCDATA)>
