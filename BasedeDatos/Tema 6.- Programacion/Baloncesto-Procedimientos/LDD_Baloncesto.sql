@@ -22,7 +22,7 @@ capitan char(7)
 
 drop table if exists Puestos;
 create table Puestos( /* Los únicos registros que puede tener la tabla son los que se han dado de alta */
-codigo tinyint unsigned  auto_increment key not null, /*  */
+codigo tinyint unsigned auto_increment key not null,
 nombre varchar(10) not null, /* Los únicos valores que puede tener este atributo son los que se han dado de alta */
 descripcion text null
 ) engine = innodb;

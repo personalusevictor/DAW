@@ -1,10 +1,14 @@
--- 1. Un procedimiento almacenado que liste a todos los jugadores que tiene la base de datos baloncesto del curso dado en la llamada al procedimiento. 
+/* 
+1. Un procedimiento almacenado que liste a todos los jugadores que tiene la base de datos baloncesto del curso dado en la llamada al 
+procedimiento.
+*/
+
 DELIMITER //
 CREATE PROCEDURE JugadoresPorCurso(IN p_curso CHAR(3))
 BEGIN
     SELECT *
     FROM Jugadores
-    WHERE clase = p_curso;
+    WHERE clase IN (SELECT grupo FROM clases WHERE nombre = p_curso);
 END //
 DELIMITER ;
 
@@ -20,11 +24,10 @@ END //
 DELIMITER ;
 
 /* 
-3. Llama a un procedimiento almacenado que devuelve todos los jugadores cuyo nombre empieza por la letra indicada al llamarlo y los tantos marcados sean 
-mayor que los dados en la llamada. Por ejemplo call Ejercicio3 ('A', 10); me muestra los jugadores que tengan nombre comienza por A y haya manrcado de de 
-10 puntos. 
+3. Llama a un procedimiento almacenado que devuelve todos los jugadores cuyo nombre empieza por la letra indicada al llamarlo y los tantos 
+marcados sean mayor que los dados en la llamada. Por ejemplo call Ejercicio3 ('A', 10); me muestra los jugadores que tengan nombre comienza 
+por A y haya manrcado de de 10 puntos. 
 */
-
 
 DELIMITER //
 CREATE PROCEDURE Ejercicio3(
@@ -40,9 +43,10 @@ END //
 DELIMITER ;
 
 /* 
-4. En la base de datos BALONCESTO crea dos tablas llamadas clases_bach y clases_cf, con la misma estructura que la tabla clases que ya existe. En 
-una almacenaremos los jugadores de la ESO, en la otra de Bachilllerato y en la última los de Ciclos Formativos. Crea un procedimiento almacenado para 
-cargar las tablas. (dependiendo del código del grupo los datos se introducen en una tabla u otra). Para insertar los datos depende del código de la clase:
+4. En la base de datos BALONCESTO crea dos tablas llamadas clases_bach y clases_cf, con la misma estructura que la tabla clases que ya 
+existe. En una almacenaremos los jugadores de la ESO, en la otra de Bachillerato y en la última los de Ciclos Formativos. Crea un procedimiento 
+almacenado para cargar las tablas. (dependiendo del código del grupo los datos se introducen en una tabla u otra). Para insertar los datos 
+depende del código de la clase:
 
     Si empieza por E(ESO) el grupo se inserta en la tabla CLASES.
     Si empieza por B (Bachillerato) se inserta en la tabla CLASES_BACH.
@@ -54,16 +58,21 @@ CREATE TABLE Clases_Bach LIKE Clases;
 CREATE TABLE Clases_CF LIKE Clases;
 
 DELIMITER //
-CREATE PROCEDURE RepartirClases()
+CREATE PROCEDURE InsertarClase(
+    IN p_codigo CHAR(3)
+    IN p_grupo VARCHAR(20)
+    IN p_nombre_tutor VARCHAR(40)
+    IN p_puntuacion INT
+    IN p_capitan CHAR(7)
+)
 BEGIN
-    DELETE FROM Clases_Bach;
-    DELETE FROM Clases_CF;
-
-    INSERT INTO Clases_Bach
-    SELECT * FROM Clases WHERE codigo LIKE 'B%';
-
-    INSERT INTO Clases_CF
-    SELECT * FROM Clases WHERE codigo LIKE 'C%';
+    IF p_codigo LIKE 'E%' THEN
+        INSERT INTO Clases VALUES (p_codigo, p_grupo, p_nombre_tutor, p_puntuacion, p_capitan);
+    ELSEIF p_codigo LIKE 'B%' THEN
+        INSERT INTO Clases_Bach VALUES (p_codigo, p_grupo, p_nombre_tutor, p_puntuacion, p_capitan);
+    ELSEIF p_codigo LIKE 'C%' THEN
+        INSERT INTO Clases_CF VALUES (p_codigo, p_grupo, p_nombre_tutor, p_puntuacion, p_capitan);
+    END IF;
 END //
 DELIMITER ;
 
