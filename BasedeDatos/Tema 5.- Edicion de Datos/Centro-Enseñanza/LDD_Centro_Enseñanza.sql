@@ -1,4 +1,3 @@
-
 create database centro_enseñanaza;
 
 use centro_enseñanaza;
