@@ -20,13 +20,15 @@ public class App {
     }
 
     public static void read() {
-        System.out.println("\nMostrar Datos | Alumnos");
+        System.out.println("\nMOSTRAR DATOS | ALUMNOS\n");
         try (ResultSet rs = Conexion.getConexion().createStatement().executeQuery("SELECT * FROM alumnos;");) {
+            System.out.printf("%-6s %-20s %-20s %-10s %-6s\n", "ID", "Nombre", "Fecha de Nacimiento", "Media",
+                    "Curso");
+            System.out.println(
+                    "------------------------------------------------------------------");
             while (rs.next()) {
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    System.out.print(rs.getObject(i) + "\t\t");
-                }
-                System.out.println();
+                System.out.printf("%-6d %-20s %-20s %-10.2f %-6s\n", rs.getInt("num"), rs.getString("nombre"),
+                        rs.getDate("fnac"), rs.getDouble("media"), rs.getString("curso"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,7 +123,7 @@ public class App {
     }
 
     public static void readCurso() {
-        System.out.println("\nMostrar Datos | Curso");
+        System.out.println("\nMostrar Datos | Curso\n");
         System.out.print("De que curso quieres mostrar los datos: ");
         String curso = sc.next();
         System.out.println();
@@ -132,11 +134,10 @@ public class App {
 
             ResultSet rs = ps.executeQuery();
 
+            System.out.printf("%-25s %-20s\n", "Nombre", "Fecha de Nacimiento");
+            System.out.println("-----------------------------------------------");
             while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                Date fnac = rs.getDate("fnac");
-
-                System.out.println("Nombre: " + nombre + " | Fecha de Nacimiento: " + fnac);
+                System.out.printf("%-25s %-20s\n", rs.getString("nombre"), rs.getDate("fnac"));
             }
 
         } catch (SQLException e) {
