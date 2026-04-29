@@ -40,13 +40,13 @@ BEGIN
     IF NEW.cantidad < OLD.cantidad THEN
         UPDATE libros
         SET stock = stock + (OLD.cantidad - NEW.cantidad)
-        WHERE codigo = NEW.codigolibro;
+        WHERE codigo = OLD.codigolibro;
 
     -- Si aumenta (caso raro), se descuenta stock
     ELSEIF NEW.cantidad > OLD.cantidad THEN
         UPDATE libros
         SET stock = stock - (NEW.cantidad - OLD.cantidad)
-        WHERE codigo = NEW.codigolibro;
+        WHERE codigo = OLD.codigolibro;
     END IF;
 END //
 
