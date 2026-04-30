@@ -15,12 +15,13 @@ public class App {
         System.out.println("3. Actualizar Datos");
         System.out.println("4. Eliminar Datos");
         System.out.println("5. Mostrar Datos - Curso");
-        System.out.println("6. Salir");
+        System.out.println("6. Mostrar Datos - Mejor y Peor Nota");
+        System.out.println("7. Salir");
         System.out.print("Elige una opcion: ");
     }
 
     public static void read() {
-        System.out.println("\nMOSTRAR DATOS | ALUMNOS\n");
+        System.out.println("\nMostrar Datos | Alumnos\n");
         try (ResultSet rs = Conexion.getConexion().createStatement().executeQuery("SELECT * FROM alumnos;");) {
             System.out.printf("%-6s %-20s %-20s %-10s %-6s\n", "ID", "Nombre", "Fecha de Nacimiento", "Media",
                     "Curso");
@@ -145,6 +146,26 @@ public class App {
         }
     }
 
+    public static void bestWorst() {
+
+        try (Connection con = Conexion.getConexion();
+                PreparedStatement ps = con.prepareStatement(
+                        "(SELECT nombre, media FROM alumnos WHERE media = (SELECT MAX(media) FROM alumnos)) UNION (SELECT nombre, media FROM alumnos WHERE media = (SELECT MIN(media) FROM alumnos))",
+                        ResultSet.TYPE_SCROLL_INSENSITIVE)) {
+            read();
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("\nMostrar Datos - Mejor y Peor Nota | Alumnos\n");
+            System.out.printf("%-25s %-6s\n", "Nombre", "Nota");
+            System.out.println("--------------------------------------");
+            while (rs.next()) {
+                System.out.printf("%-25s %-6.2f\n", rs.getString("nombre"), rs.getDouble("media"));
+            }
+        } catch (SQLException e) {
+        }
+
+    }
+
     public static void main(String[] args) throws Exception {
         int opcion;
 
@@ -158,7 +179,8 @@ public class App {
                 case 3 -> update();
                 case 4 -> delete();
                 case 5 -> readCurso();
-                case 6 -> System.out.println("\nSaliendo del programa...");
+                case 6 -> bestWorst();
+                case 7 -> System.out.println("\nSaliendo del programa...");
                 default -> System.out.println("\nError: la opcion introducida no es correcta");
             }
         } while (opcion != 6);
