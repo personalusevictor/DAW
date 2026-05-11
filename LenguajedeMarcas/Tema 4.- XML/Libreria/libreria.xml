@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="libreria.xsl" type="text/xsl"?>
+<!DOCTYPE Libreria SYSTEM "libreria.dtd">
+
+<Libreria>
+    <Libro>
+        <Titulo>Titulo 1</Titulo>
+        <Autor>Autor 1</Autor>
+        <Editor>Editor 1</Editor>
+        <ISBN>ISBN 1</ISBN>
+        <Precio>10</Precio>
+        <Novedad>Si</Novedad>
+    </Libro>
+    <Libro>
+        <Titulo>Titulo 2</Titulo>
+        <Autor>Autor 1</Autor>
+        <Editor>Editor 2</Editor>
+        <ISBN>ISBN 2</ISBN>
+        <Precio>12</Precio>
+        <Novedad>No</Novedad>
+    </Libro>
+    <Libro>
+        <Titulo>Titulo 3</Titulo>
+        <Autor>Autor 3</Autor>
+        <Editor>Editor 2</Editor>
+        <ISBN>ISBN 3</ISBN>
+        <Precio>15</Precio>
+        <Novedad>No</Novedad>
+    </Libro>
+    <Libro>
+        <Titulo>Titulo 4</Titulo>
+        <Autor>Autor 2</Autor>
+        <Editor>Editor 2</Editor>
+        <ISBN>ISBN 4</ISBN>
+        <Precio>16</Precio>
+        <Novedad>Si</Novedad>
+    </Libro>
+</Libreria>

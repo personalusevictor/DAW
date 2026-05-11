@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #032cc2, #021a73);
+  color: #ffffff;
+  font-family: "Sora", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor central */
+body > * {
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Título */
+h1 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #c29903;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Cabecera */
+th {
+  background-color: #c29903;
+  color: #032cc2;
+  padding: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Celdas */
+td {
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hover */
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: 0.3s;
+}
+
+/* Nota alta (opcional si luego lo usas con XSLT) */
+.aprobado {
+  color: #00ff55;
+  font-weight: 600;
+}
+
+/* Nota baja */
+.suspenso {
+  color: #ff2323;
+  font-weight: 600;
+}
+
+.text-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+img {
+  width: 30px;
+  height: 20px;
+}
